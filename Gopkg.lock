@@ -87,6 +87,23 @@
   version = "v2.0.5"
 
 [[projects]]
+  name = "github.com/gobuffalo/pop"
+  packages = [
+    ".",
+    "associations",
+    "columns",
+    "fizz",
+    "fizz/translators",
+    "nulls",
+    "slices",
+    "soda/cmd",
+    "soda/cmd/generate",
+    "soda/cmd/schema"
+  ]
+  revision = "fb309e29896c205465f53af10679c52f9ce7c858"
+  version = "v4.5.10"
+
+[[projects]]
   name = "github.com/gobuffalo/uuid"
   packages = ["."]
   revision = "3a9fb6c5c481d4886f1e9323c61ad743fb955860"
