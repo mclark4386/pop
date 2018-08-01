@@ -3,6 +3,7 @@ package associations
 import (
 	"fmt"
 	"reflect"
+	"strings"
 	"time"
 
 	"github.com/gobuffalo/uuid"
@@ -119,9 +120,12 @@ func (m *manyToManyAssociation) Statements() []AssociationStatement {
 		columnFieldID = fmt.Sprintf("%s%s", inflect.Underscore(i.Type().Name()), "_id")
 	}
 
+	var manyIDsWeShouldHave []string
+
 	for i := 0; i < m.fieldValue.Len(); i++ {
 		v := m.fieldValue.Index(i)
 		manyIDValue := v.FieldByName("ID").Interface()
+		manyIDsWeShouldHave = append(manyIDsWeShouldHave, fmt.Sprintf("%v", manyIDValue))
 		modelIDValue := m.model.FieldByName("ID").Interface()
 		stm := "INSERT INTO %s (%s,%s,%s,%s) VALUES(?,?,?,?)"
 
@@ -141,6 +145,8 @@ func (m *manyToManyAssociation) Statements() []AssociationStatement {
 
 		statements = append(statements, associationStm)
 	}
+
+	fmt.Printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nMany IDs to keep: %s\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n", strings.Join(manyIDsWeShouldHave, ","))
 
 	return statements
 }

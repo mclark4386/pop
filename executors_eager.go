@@ -130,7 +130,7 @@ func (c *Connection) eagerValidateAndCreate(model interface{}, excludeColumns ..
 }
 
 func (c *Connection) eagerUpdate(model interface{}, excludeColumns ...string) error {
-	asos, err := associations.AssociationsForStruct(model, c.eagerFields...)
+	asos, err := associations.ForStruct(model, c.eagerFields...)
 	if err != nil {
 		return err
 	}
@@ -231,7 +231,7 @@ func (c *Connection) eagerUpdate(model interface{}, excludeColumns ...string) er
 }
 
 func (c *Connection) eagerValidateAndUpdate(model interface{}, excludeColumns ...string) (*validate.Errors, error) {
-	asos, err := associations.AssociationsForStruct(model, c.eagerFields...)
+	asos, err := associations.ForStruct(model, c.eagerFields...)
 	verrs := validate.NewErrors()
 
 	if err != nil {
